@@ -1,0 +1,9 @@
+.topnav {
+    overflow: hidden;
+    height: 60px;
+    border-bottom: 2px solid #D9D9D9;
+    
+  }
+  .topnav img {
+    height: 50px;
+  }
