@@ -1,6 +1,6 @@
 
 .team {
-    background-color: antiquewhite;
+    background-color: whitesmoke;
 }
 .main-section {
     display: flex;
@@ -11,9 +11,10 @@
 
 .card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    max-width: 400px;
+    width: 300px;
     margin: auto;
     text-align: center;
+    margin-bottom: 10px;
 }
 
 .title {
@@ -27,7 +28,7 @@ button {
     display: inline-block;
     padding: 8px;
     color: white;
-    background-color: #000;
+    background-color: green !important;
     text-align: center;
     cursor: pointer;
     width: 100%;
