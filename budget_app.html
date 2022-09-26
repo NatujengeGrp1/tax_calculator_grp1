@@ -54,10 +54,10 @@
         <div class="container">
             <div class="row">
                 <div class="col text-end">
-                    <a href="#" class="btn btn-outline-primary">Tax Calculator</a>
+                    <a href="/index.html" class="btn btn-outline-primary">Tax Calculator</a>
                 </div>
                 <div class="col">
-                    <a href="#" class="btn btn-outline-success">Bill Manager</a>
+                    <a href="/budget_app.html" class="btn btn-outline-success">Bill Manager</a>
                 </div>
             </div>
             <div class="row text-center">
@@ -68,15 +68,80 @@
                 <div class="col-md-6">
                     <h5>Net Salary</h5>
                     <form>
-                        <div class="input-group mb-3">
-                            <span class="input-group-text">KSH</span>
-                            <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
-                            <span class="input-group-text">.00</span>
+                        <div class="row">
+                            <div class="col-10">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text">KSH</span>
+                                    <input type="text" class="form-control" id="salary" aria-label="Amount (to the nearest dollar)">
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <button type="submit" class="btn btn-primary" onclick="getUserSalary()">Submit</button>
+                            </div>
                         </div>
+                        
                     </form>
                 </div>
                 <div class="col-md-3"></div>
-
+            </div>
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Name</th>
+                                <th scope="col">Amount</th>
+                                <th colspan="2">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="data">
+                            
+                        </tbody>
+                    </table>
+                    <form>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Item</span>
+                            <input type="text" class="form-control" placeholder="Item" id="item" name="item">
+                            <span class="input-group-text">Amount</span>
+                            <input type="text" class="form-control" placeholder="Amount" id="amount" name="amount">
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="text-end">
+                                    <button type="submit" class="btn btn-secondary" onclick="storeBillItems()">Submit</button>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        
+                    </form>
+                </div>
+                <div class="col-md-3"></div>
+                
+            </div>
+            <hr/>
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td><b>Net Salary</b></td>
+                                <td id="netSalary"></td>
+                            </tr>
+                            <tr>
+                                <td><b>Total Bills</b></td>
+                                <td id="totalBill"></td>
+                            </tr>
+                            <tr>
+                                <td><b>Balance</b></td>
+                                <td id="balance"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-3"></div>
             </div>
         </div>
 
@@ -85,6 +150,126 @@
             <h5 class="text-center">Powered By Natujenge</h5>
         </div>
     </footer>
-    </body>
+
+<script type="text/javascript">
+ const storeBillItems = () => {
+    const name = document.getElementById("item").value;
+    const amount = document.getElementById("amount").value;
+     //localStorage.setItem('items', JSON.stringify([]));
+    let items = JSON.parse(localStorage.getItem('items') || '[]');
+    console.log("Before: ", items);
+     /*
+     let billItem = {
+         "id": Math.floor(Math.random() * 1000),
+         "name": name,
+         "amount": amount
+     }
+     */
+     localStorage.setItem("billItem", JSON.stringify({"id": Math.floor(Math.random() * 1000),"name": name, "amount": amount}));
+     const storedBillItem = JSON.parse(localStorage.getItem("billItem"), '{}');
+     console.log("New Bill Item: " + storedBillItem);
+
     
+    localStorage.setItem('items', JSON.stringify([...items, { "id": Math.floor(Math.random() * 1000), "name": name, "amount": amount }]));
+    //window.location.reload();
+ }
+
+
+const getUserSalary = () => {
+    const salary = document.getElementById('salary').value;
+    console.log(salary);
+    localStorage.setItem('salary', JSON.stringify(salary));
+}
+
+var items = JSON.parse(localStorage.getItem('items') || '[]');
+
+
+const getItemId = async (id) => {
+    const myId = await id;
+    console.log(id);
+}
+
+const getStoredBillItems = () => {
+    
+    console.log("After: ", items);
+    var temp = ""
+    items.forEach((item) => {
+        let id = item.id
+        temp += "<tr>";
+        temp += "<td>" + item.name + "</td>";
+        temp += "<td>" + `KSH. ${item.amount}` + "</td>";
+        temp += "<td>" + '<button class="btn btn-outline-primary">Edit</button>' + "</td>";
+        temp += "<td>" + '<button class="btn btn-outline-danger">Delete</button>' + "</td>";
+        temp += "</tr>";
+        
+    });
+    document.getElementById("data").innerHTML += temp;
+}
+
+getStoredBillItems()
+
+
+const deleteExpense = (id) => {
+    //let items = items.filter(item => item.id !== id);
+    //localStorage.setItem('items', JSON.stringify(items));
+    
+    //let myId = getItemI()
+    console.log("ID: ", id)
+}
+
+
+
+/*
+items = [
+    {
+        "id": 1,
+        "name": "Netflix",
+        "amount": 1400
+    },
+    {
+        "id": 2,
+        "name": "Internet",
+        "amount": 4100
+    },
+    {
+        "id": 3,
+        "name": "Transport",
+        "amount": 5000
+    }
+]
+
+const displayBillItems = () => {
+    var temp =""
+    items.forEach((item) => {
+        temp += "<tr>";
+            temp += "<td>" + item.id + "</td>";
+            temp += "<td>" + item.name + "</td>";
+            temp += "<td>" + `KSH. ${item.amount}` + "</td>";
+            temp += "</tr>";
+    });
+    document.getElementById("data").innerHTML += temp;
+}
+displayBillItems();
+*/
+
+const calculateBills = () => {
+    const salary = JSON.parse(localStorage.getItem('salary'), '0');
+    document.getElementById('netSalary').innerHTML = `KSH. ${salary}`
+    console.log("Stored Salary: ", salary);
+
+
+    const totalBill = items.reduce((sum, item) => sum + parseInt(item.amount), 0);
+    console.log(totalBill);
+    document.getElementById("totalBill").innerHTML = `KSH. ${totalBill}`;
+
+    let balance = parseInt(salary) - parseInt(totalBill);
+    let updatedBalance = balance ? balance : 0
+    document.getElementById("balance").innerHTML = `KSH. ${updatedBalance}`;
+}
+
+calculateBills();
+
+
+    </script>
+    </body>
     </html>
