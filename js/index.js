@@ -8,7 +8,7 @@ const insurancerelief1 = document.querySelector('.insurancerelief')
 const paye1 = document.querySelector('.paye')
 const nhifcontribution1 = document.querySelector('.nhifcontribution')
 
-var nssfcontribution = 1080
+var nssfcontribution = "00"
 var personalrelief = 2400
 var insurancerelief = 210
 var nhifcontribution = 1400
@@ -34,8 +34,9 @@ window.onload = function() {
     //PAYE before relief is calcualted from ==> Taxable pay
     //PAYE/ payable tax = tax before relief - all reliefs
     //Net Pay = Taxable - (PAYE + NHIF)
-
-    var taxableincome = grosssalary - nssfcontribution;
+    var nssf = grosssalary * 0.0040 //0.4 %
+    nssfcontribution1.innerText = nssf
+    var taxableincome = grosssalary - nssf;
     console.log(`taxableincome ${taxableincome}`)
 
     taxableincome1.innerText = taxableincome
