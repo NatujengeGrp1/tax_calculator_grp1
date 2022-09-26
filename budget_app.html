@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <link rel="icon" type="image/png" href="./images/favicon.PNG" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Budget App</title>
 
@@ -15,12 +15,20 @@
             integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
             crossorigin="anonymous"></script>
         <style>
-            .footer-text {
+            footer-text {
                 right: 0;
                 left: 0;
                 bottom: 0;
                 padding: 0px;
                 position: fixed;
+            }
+            .bills {
+                
+                background-color: #F5F5F5;
+                border-radius: 10px;
+            }
+            .line-below {
+                border-top: 3px solid black;
             }
         </style>
     </head>
@@ -60,9 +68,14 @@
                     <a href="/budget_app.html" class="btn btn-outline-success">Bill Manager</a>
                 </div>
             </div>
-            <div class="row text-center">
-                <hr style="height:2px; width:100%; text-align: center; border-width:0; margin-top: 10px; color: black; background-color:black" />
+            <div class="row mt-3 mb-3">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <hr style="height:2px; width:100%; border-width:0; color: black; background-color:black" />
+                </div>
+                <div class="col-md-3"></div>
             </div>
+            
             <div class="row">
                 <div class="col-md-3"></div>
                 <div class="col-md-6">
@@ -86,19 +99,14 @@
             </div>
             <div class="row">
                 <div class="col-md-3"></div>
-                <div class="col-md-6">
+                <div class="col-md-6 p-3 bills">
                     <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">Name</th>
-                                <th scope="col">Amount</th>
-                                <th colspan="2">Actions</th>
-                            </tr>
-                        </thead>
+                       
                         <tbody id="data">
                             
                         </tbody>
                     </table>
+                    <br/>
                     <form>
                         <div class="input-group mb-3">
                             <span class="input-group-text">Item</span>
@@ -109,7 +117,7 @@
                         <div class="row">
                             <div class="col">
                                 <div class="text-end">
-                                    <button type="submit" class="btn btn-secondary" onclick="storeBillItems()">Submit</button>
+                                    <button type="submit" class="btn btn-secondary bg-dark" onclick="storeBillItems()">Submit</button>
                                 </div>
                             </div>
                             
@@ -118,12 +126,9 @@
                     </form>
                 </div>
                 <div class="col-md-3"></div>
-                
-            </div>
-            <hr/>
-            <div class="row">
                 <div class="col-md-3"></div>
-                <div class="col-md-6">
+                <div class="col-md-6 bills">
+                    <hr/>
                     <table class="table">
                         <tbody>
                             <tr>
@@ -143,6 +148,7 @@
                 </div>
                 <div class="col-md-3"></div>
             </div>
+            <hr/>
         </div>
 
     <footer class="footer-text mt-auto py-3 bg-light">
@@ -198,8 +204,7 @@ const getStoredBillItems = () => {
         temp += "<tr>";
         temp += "<td>" + item.name + "</td>";
         temp += "<td>" + `KSH. ${item.amount}` + "</td>";
-        temp += "<td>" + '<button class="btn btn-outline-primary">Edit</button>' + "</td>";
-        temp += "<td>" + '<button class="btn btn-outline-danger">Delete</button>' + "</td>";
+        temp += "<td>" + `<button class="btn btn-outline-danger" onclick="deleteExpense(${id})">Delete</button>` + "</td>";
         temp += "</tr>";
         
     });
@@ -210,13 +215,19 @@ getStoredBillItems()
 
 
 const deleteExpense = (id) => {
-    //let items = items.filter(item => item.id !== id);
-    //localStorage.setItem('items', JSON.stringify(items));
+    
+    let items = JSON.parse(localStorage.getItem('items') || '[]');
+    let newItems = items.filter(item => item.id !== id);
+    localStorage.setItem('items', JSON.stringify(newItems));
     
     //let myId = getItemI()
-    console.log("ID: ", id)
+    console.log("ID: ", id, items);
+    window.location.reload();
 }
 
+const sayHello = (id) => {
+    console.log("Hello!: ", id);
+}
 
 
 /*
@@ -253,7 +264,7 @@ displayBillItems();
 */
 
 const calculateBills = () => {
-    const salary = JSON.parse(localStorage.getItem('salary'), '0');
+    const salary = JSON.parse(localStorage.getItem('salary') || '0');
     document.getElementById('netSalary').innerHTML = `KSH. ${salary}`
     console.log("Stored Salary: ", salary);
 
