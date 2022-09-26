@@ -34,6 +34,7 @@ window.onload = function() {
     //PAYE before relief is calcualted from ==> Taxable pay
     //PAYE/ payable tax = tax before relief - all reliefs
     //Net Pay = Taxable - (PAYE + NHIF)
+    if (grosssalary >= 24000) {
     var nssf = grosssalary * 0.0040 //0.4 %
     nssfcontribution1.innerText = nssf
     var taxableincome = grosssalary - nssf;
@@ -61,7 +62,9 @@ window.onload = function() {
     console.log(`Netpay ${netpay}`)
 
     netpay1.innerText = netpay
-
+    }else {
+      alert("Gross Pay Not Taxable")
+    }
     
   }
 
@@ -91,6 +94,7 @@ window.onload = function() {
         return paye
 
     }else {
+      alert("Gross Pay Not Taxable")
         return taxable
     }
   }
