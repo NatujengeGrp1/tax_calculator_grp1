@@ -30,6 +30,12 @@
             .line-below {
                 border-top: 3px solid black;
             }
+            .calculate button strong {
+                color: white;
+            }
+            .billmanager {
+                background-color: #1CB484;
+            }
         </style>
     </head>
     <body>
@@ -62,10 +68,10 @@
         <div class="container">
             <div class="row">
                 <div class="col text-end">
-                    <a href="/index.html" class="btn btn-outline-primary">Tax Calculator</a>
+                    <a href="/index.html" class="btn btn-outline-success">Tax Calculator</a>
                 </div>
                 <div class="col">
-                    <a href="/budget_app.html" class="btn btn-outline-success">Bill Manager</a>
+                    <a href="/budget_app.html" class="btn btn-success billmanager">Bill Manager</a>
                 </div>
             </div>
             <div class="row mt-3 mb-3">
@@ -89,7 +95,7 @@
                                 </div>
                             </div>
                             <div class="col-2">
-                                <button type="submit" class="btn btn-primary" onclick="getUserSalary()">Submit</button>
+                                <button type="submit" class="btn btn-success billmanager" onclick="getUserSalary()">Submit</button>
                             </div>
                         </div>
                         
@@ -117,7 +123,7 @@
                         <div class="row">
                             <div class="col">
                                 <div class="text-end">
-                                    <button type="submit" class="btn btn-secondary bg-dark" onclick="storeBillItems()">Submit</button>
+                                    <button type="submit" class="btn btn-success billmanager" onclick="storeBillItems()">Submit</button>
                                 </div>
                             </div>
                             
@@ -228,7 +234,7 @@ const insertBalance = () => {
     }else {
         temp += "<tr>"
         temp += "<td>" + "Balance" + "</td>"
-        temp += "<td class='bg-success'>" + `KSH. ${balance}` + "</td>"
+        temp += "<td class='bg-success billmanager'>" + `KSH. ${balance}` + "</td>"
         temp += "</tr>"
     }
     
