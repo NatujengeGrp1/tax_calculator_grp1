@@ -1,0 +1,14 @@
+.budget_app {
+    position: relative;
+    width: 1428px;
+    height: 1549px;
+    background: #FFFFFF;
+}
+
+.tax_bill_app_button {
+    position: absolute;
+    width: 843px;
+    height: 52px;
+    left: 292px;
+    top: 216px;
+}
