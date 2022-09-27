@@ -130,19 +130,8 @@
                 <div class="col-md-6 bills">
                     <hr/>
                     <table class="table">
-                        <tbody>
-                            <tr>
-                                <td><b>Net Salary</b></td>
-                                <td id="netSalary"></td>
-                            </tr>
-                            <tr>
-                                <td><b>Total Bills</b></td>
-                                <td id="totalBill"></td>
-                            </tr>
-                            <tr>
-                                <td><b>Balance</b></td>
-                                <td id="balance"></td>
-                            </tr>
+                        <tbody id="calculations">
+                            
                         </tbody>
                     </table>
                 </div>
@@ -212,6 +201,40 @@ const getStoredBillItems = () => {
 }
 
 getStoredBillItems()
+
+
+const insertBalance = () => {
+    const salary = JSON.parse(localStorage.getItem('salary') || '0');
+    const totalBill = items.reduce((sum, item) => sum + parseInt(item.amount), 0);
+    let balance = parseInt(salary) - parseInt(totalBill);
+    let twenty_percent_salary = (20/100) * salary;
+
+
+
+    var temp = ""
+    temp += "<tr>"
+    temp += "<td>" + "Net Salary" + "</td>"
+    temp += "<td>" + `KSH. ${salary}` + "</td>"
+    temp += "</tr>"
+    temp += "<tr>"
+    temp += "<td>" + "Total Bill" + "</td>"
+    temp += "<td>" + `KSH. ${totalBill}` + "</td>"
+    temp += "</tr>"
+    if(balance < twenty_percent_salary) {
+        temp += "<tr>"
+        temp += "<td>" + "Balance" + "</td>"
+        temp += "<td class='bg-danger'>" + `KSH. ${balance}` + "</td>"
+        temp += "</tr>"
+    }else {
+        temp += "<tr>"
+        temp += "<td>" + "Balance" + "</td>"
+        temp += "<td class='bg-success'>" + `KSH. ${balance}` + "</td>"
+        temp += "</tr>"
+    }
+    
+    document.getElementById("calculations").innerHTML += temp;
+}
+insertBalance();
 
 
 const deleteExpense = (id) => {
