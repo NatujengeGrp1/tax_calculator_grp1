@@ -15,10 +15,10 @@ var nhifcontribution = 1400
 
 window.onload = function() {
     
-    nssfcontribution1.innerText = nssfcontribution
-    personalrelief1.innerText = personalrelief
-    insurancerelief1.innerText = insurancerelief
-    nhifcontribution1.innerText = nhifcontribution
+    nssfcontribution1.innerText = nssfcontribution.toFixed(2)
+    personalrelief1.innerText = personalrelief.toFixed(2)
+    insurancerelief1.innerText = insurancerelief.toFixed(2)
+    nhifcontribution1.innerText = nhifcontribution.toFixed(2)
 
 
   };
@@ -37,18 +37,18 @@ window.onload = function() {
     if (grosssalary >= 24000) {
     //var nssf = grosssalary * 0.0040 //0.4 %
     var nssf = nssfcontribution
-    nssfcontribution1.innerText = nssf
+    nssfcontribution1.innerText = nssf.toFixed(2)
     var taxableincome = grosssalary - nssf;
     console.log(`taxableincome ${taxableincome}`)
 
-    taxableincome1.innerText = taxableincome
+    taxableincome1.innerText = taxableincome.toFixed(2)
 
 
 
     var taxbeforerelief = PAYE(taxableincome)
     console.log(`taxbeforerelief ${taxbeforerelief}`)
 
-    taxbeforerelief1.innerText = taxbeforerelief
+    taxbeforerelief1.innerText = taxbeforerelief.toFixed(2)
 
 
 
@@ -58,14 +58,14 @@ window.onload = function() {
       paye = 00
     }
 
-    paye1.innerText = paye
+    paye1.innerText = paye.toFixed(2)
 
 
 
     var netpay = taxableincome - (paye + nhifcontribution)
     console.log(`Netpay ${netpay}`)
 
-    netpay1.innerText = netpay
+    netpay1.innerText = netpay.toFixed(2)
     }else {
       alert("Gross Salary Not Taxable")
     }
