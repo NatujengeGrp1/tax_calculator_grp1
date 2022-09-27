@@ -53,6 +53,9 @@ window.onload = function() {
 
     var paye = taxbeforerelief - (personalrelief + insurancerelief)
     console.log(`paye ${paye}`)
+    if(paye < 0) {
+      paye = 00
+    }
 
     paye1.innerText = paye
 
@@ -63,7 +66,7 @@ window.onload = function() {
 
     netpay1.innerText = netpay
     }else {
-      alert("Gross Pay Not Taxable")
+      alert("Gross Salary Not Taxable")
     }
     
   }
@@ -72,7 +75,7 @@ window.onload = function() {
     var secondTaxBand = 0
     var firstTaxBand = 0
     var anyAbove = 0
-    if (taxable >= 24000){
+    if (taxable){
         firstTaxBand = 24000 * 0.1
         console.log(`firstTaxband ${firstTaxBand}`);
 
@@ -91,7 +94,13 @@ window.onload = function() {
 
         var paye = firstTaxBand + secondTaxBand + anyAbove;
         console.log(`PayeBE ${paye}`)
-        return paye
+        if(paye < 0) {
+          paye = 0;
+          return paye
+        }else {
+          return paye
+        }
+        
 
     }else {
       alert("Gross Pay Not Taxable")
