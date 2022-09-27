@@ -26,6 +26,13 @@
             }
             .calculate {
                 background-color: #1CB484;
+                
+            }
+            .calculate button strong {
+                color: white;
+            }
+            .taxcalculator {
+                background-color: #1CB484;
             }
         </style>
     </head>
@@ -59,7 +66,7 @@
         <div class="container">
             <div class="row">
                 <div class="col text-end">
-                    <a href="/index.html" class="btn btn-outline-primary">Tax Calculator</a>
+                    <a href="/index.html" class="btn btn-success taxcalculator">Tax Calculator</a>
                 </div>
                 <div class="col">
                     <a href="/budget_app.html" class="btn btn-outline-success">Bill Manager</a>
@@ -82,7 +89,7 @@
                             <input type="number" placeholder="Enter your Gross Salary"
                              class="form-control" id="grosssalary">
                             <span class="input-group-text calculate">
-                                <button type="submit" class="btn" onclick="handleGrossSalary()">Calculate</button>
+                                <button type="submit" class="btn" onclick="handleGrossSalary()"><strong>Calculate</strong></button>
                             </span>
                         </div>
                     </form>
